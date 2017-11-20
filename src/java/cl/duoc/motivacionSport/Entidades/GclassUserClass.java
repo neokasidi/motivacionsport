@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package cl.duoc.motivacionSport.Entidades;
 
 import java.io.Serializable;
@@ -10,13 +15,26 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
 
-
+/**
+ *
+ * @author samm
+ */
 @Entity
 @Table(name = "gclass_user_class")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "GclassUserClass.findAll", query = "SELECT g FROM GclassUserClass g"),
+    @NamedQuery(name = "GclassUserClass.findById", query = "SELECT g FROM GclassUserClass g WHERE g.id = :id"),
+    @NamedQuery(name = "GclassUserClass.findByCreateAt", query = "SELECT g FROM GclassUserClass g WHERE g.createAt = :createAt"),
+    @NamedQuery(name = "GclassUserClass.findByUpdateAt", query = "SELECT g FROM GclassUserClass g WHERE g.updateAt = :updateAt"),
+    @NamedQuery(name = "GclassUserClass.findByActive", query = "SELECT g FROM GclassUserClass g WHERE g.active = :active")})
 public class GclassUserClass implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,15 +60,6 @@ public class GclassUserClass implements Serializable {
 
     public GclassUserClass() {
     }
-
-    public GclassUserClass(Integer id, Date createAt, Date updateAt, Short active, GclassClass classId, GclassUsuario userId) {
-        this.id = id;
-        this.createAt = createAt;
-        this.updateAt = updateAt;
-        this.active = active;
-        this.classId = classId;
-        this.userId = userId;
-    }   
 
     public GclassUserClass(Integer id) {
         this.id = id;
@@ -105,7 +114,28 @@ public class GclassUserClass implements Serializable {
     }
 
     @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof GclassUserClass)) {
+            return false;
+        }
+        GclassUserClass other = (GclassUserClass) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
     public String toString() {
-        return "GclassUserClass{" + "id=" + id + ", createAt=" + createAt + ", updateAt=" + updateAt + ", active=" + active + ", classId=" + classId + ", userId=" + userId + '}';
-    }        
+        return "cl.duoc.motivacionSport.Entidades.GclassUserClass[ id=" + id + " ]";
+    }
+    
 }

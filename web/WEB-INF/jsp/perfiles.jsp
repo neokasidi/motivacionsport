@@ -1,4 +1,22 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="f" uri="http://www.springframework.org/tags/form" %>
+
 <%@include file="../layout/head.jsp" %>
+<div class="box">
+    <div class="box-header">
+        <h4>Nuevo Perfil</h4>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <f:form method="post" action="/motivacionsport/perfiles/crear.htm" commandName="perfile">
+            <div class="form-group">
+                <f:label path="name">Nombre:</f:label>
+                <f:input cssClass="form-control" path="name"/>
+            </div>          
+            <button type="submit" class="btn btn-success">Nuevo Perfil</button>           
+        </f:form>
+    </div>
+</div>
 <div class="box">
     <div class="box-header">
         <h3 class="box-title">Data Table With Full Features</h3>
@@ -16,13 +34,15 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td><a class="btn btn-primary" href="/motivacionsport/perfiles/editar.htm">Editar</a></td>
-                </tr>                
+                <c:forEach items="${perfiles}" var="p">
+                    <tr>
+                        <td>1</td>
+                        <td>${p.name}</td>
+                        <td>${p.createAt}</td>
+                        <td>${p.active}</td>
+                        <td><a class="btn btn-primary" href="/motivacionsport/perfiles/editar.htm">Editar</a></td>
+                    </tr>
+                </c:forEach>                
             </tbody>
             <tfoot>
                 <tr>

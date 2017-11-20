@@ -1,8 +1,13 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package cl.duoc.motivacionSport.Entidades;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,17 +16,33 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
-
+/**
+ *
+ * @author samm
+ */
 @Entity
 @Table(name = "gclass_class")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "GclassClass.findAll", query = "SELECT g FROM GclassClass g"),
+    @NamedQuery(name = "GclassClass.findById", query = "SELECT g FROM GclassClass g WHERE g.id = :id"),
+    @NamedQuery(name = "GclassClass.findByNameClass", query = "SELECT g FROM GclassClass g WHERE g.nameClass = :nameClass"),
+    @NamedQuery(name = "GclassClass.findByCreateAt", query = "SELECT g FROM GclassClass g WHERE g.createAt = :createAt"),
+    @NamedQuery(name = "GclassClass.findByUpdateAt", query = "SELECT g FROM GclassClass g WHERE g.updateAt = :updateAt"),
+    @NamedQuery(name = "GclassClass.findByActive", query = "SELECT g FROM GclassClass g WHERE g.active = :active")})
 public class GclassClass implements Serializable {
-    
+
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -46,21 +67,12 @@ public class GclassClass implements Serializable {
     private GclassHorarios horarioIdOut;
     @JoinColumn(name = "local_id", referencedColumnName = "id")
     @ManyToOne
-    private GclassLocal localId;   
+    private GclassLocal localId;
+    @OneToMany(mappedBy = "classId")
+    private List<GclassUserClass> gclassUserClassList;
 
     public GclassClass() {
     }
-
-    public GclassClass(Integer id, String nameClass, Date createAt, Date updateAt, Short active, GclassHorarios horarioIdIn, GclassHorarios horarioIdOut, GclassLocal localId) {
-        this.id = id;
-        this.nameClass = nameClass;
-        this.createAt = createAt;
-        this.updateAt = updateAt;
-        this.active = active;
-        this.horarioIdIn = horarioIdIn;
-        this.horarioIdOut = horarioIdOut;
-        this.localId = localId;
-    }   
 
     public GclassClass(Integer id) {
         this.id = id;
@@ -130,8 +142,38 @@ public class GclassClass implements Serializable {
         this.localId = localId;
     }
 
+    @XmlTransient
+    public List<GclassUserClass> getGclassUserClassList() {
+        return gclassUserClassList;
+    }
+
+    public void setGclassUserClassList(List<GclassUserClass> gclassUserClassList) {
+        this.gclassUserClassList = gclassUserClassList;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof GclassClass)) {
+            return false;
+        }
+        GclassClass other = (GclassClass) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
     @Override
     public String toString() {
-        return "GclassClass{" + "id=" + id + ", nameClass=" + nameClass + ", createAt=" + createAt + ", updateAt=" + updateAt + ", active=" + active + ", horarioIdIn=" + horarioIdIn + ", horarioIdOut=" + horarioIdOut + ", localId=" + localId + '}';
+        return "cl.duoc.motivacionSport.Entidades.GclassClass[ id=" + id + " ]";
     }
+    
 }

@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package cl.duoc.motivacionSport.Entidades;
 
 import java.io.Serializable;
@@ -8,16 +13,30 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ *
+ * @author samm
+ */
 @Entity
 @Table(name = "gclass_perfil")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "GclassPerfil.findAll", query = "SELECT g FROM GclassPerfil g"),
+    @NamedQuery(name = "GclassPerfil.findById", query = "SELECT g FROM GclassPerfil g WHERE g.id = :id"),
+    @NamedQuery(name = "GclassPerfil.findByName", query = "SELECT g FROM GclassPerfil g WHERE g.name = :name"),
+    @NamedQuery(name = "GclassPerfil.findByCreateAt", query = "SELECT g FROM GclassPerfil g WHERE g.createAt = :createAt"),
+    @NamedQuery(name = "GclassPerfil.findByUpdateAt", query = "SELECT g FROM GclassPerfil g WHERE g.updateAt = :updateAt"),
+    @NamedQuery(name = "GclassPerfil.findByActive", query = "SELECT g FROM GclassPerfil g WHERE g.active = :active")})
 public class GclassPerfil implements Serializable {
 
-    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -33,21 +52,13 @@ public class GclassPerfil implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateAt;
     @Column(name = "active")
-    private Short active;
+    private int active;
 
     public GclassPerfil() {
     }
 
-    public GclassPerfil(Integer id, String name, Date createAt, Date updateAt, Short active) {
-        this.id = id;
+    public GclassPerfil(String name) {
         this.name = name;
-        this.createAt = createAt;
-        this.updateAt = updateAt;
-        this.active = active;
-    }    
-
-    public GclassPerfil(Integer id) {
-        this.id = id;
     }
 
     public Integer getId() {
@@ -82,7 +93,7 @@ public class GclassPerfil implements Serializable {
         this.updateAt = updateAt;
     }
 
-    public Short getActive() {
+    public int getActive() {
         return active;
     }
 
@@ -90,9 +101,4 @@ public class GclassPerfil implements Serializable {
         this.active = active;
     }
 
-    @Override
-    public String toString() {
-        return "GclassPerfil{" + "id=" + id + ", name=" + name + ", createAt=" + createAt + ", updateAt=" + updateAt + ", active=" + active + '}';
-    }  
-    
 }
