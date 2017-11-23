@@ -14,7 +14,7 @@
             <div>Motivacion<span>Sport</span></div>
         </div>
         <br>
-        <form method="post" action="/motivacionsport/home/dashboard.htm">
+        <form action="home/dashboard.htm" method="post">
             <div class="login">
                 <input type="text" placeholder="Usuario" name="user"><br>
                 <input type="password" placeholder="Contraseña" name="password"><br>

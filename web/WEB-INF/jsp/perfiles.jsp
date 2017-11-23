@@ -34,15 +34,15 @@
                 </tr>
             </thead>
             <tbody>
-                <c:forEach items="${perfiles}" var="p">
+                
                     <tr>
                         <td>1</td>
-                        <td>${p.name}</td>
-                        <td>${p.createAt}</td>
-                        <td>${p.active}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                         <td><a class="btn btn-primary" href="/motivacionsport/perfiles/editar.htm">Editar</a></td>
                     </tr>
-                </c:forEach>                
+                        
             </tbody>
             <tfoot>
                 <tr>
