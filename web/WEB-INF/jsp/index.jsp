@@ -5,11 +5,14 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Motivacion Sport</title>        
         <link href="/motivacionsport/assets/css/style.css" rel="stylesheet" type="text/css"/>
+        <link rel="icon" type="image/jpeg" sizes="32x32" href="/motivacionsport/assets/img/favicon.jpg">
     </head>
 
     <body>
         <div class="body"></div>
-        <div class="grad"></div>
+        <div class="grad">
+            <img src="/motivacionsport/assets/img/LOGO-03.jpg" style="width: 12%"/>
+        </div>
         <div class="header">
             <div>Motivacion<span>Sport</span></div>
         </div>

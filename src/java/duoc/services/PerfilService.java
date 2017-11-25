@@ -8,7 +8,6 @@ package duoc.services;
 import duoc.dao.PerfilDao;
 import duoc.entidades.GclassPerfil;
 import java.util.List;
-import javax.ejb.EJB;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

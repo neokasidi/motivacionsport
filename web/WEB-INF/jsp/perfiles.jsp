@@ -4,7 +4,7 @@
 <%@include file="../layout/head.jsp" %>
 <div class="box">
     <div class="box-header">
-        <h3 class="box-title">Data Table With Full Features</h3>
+        <h3 class="box-title">Lista de Perfiles</h3>
     </div>
     <!-- /.box-header -->
     <div class="box-body">
@@ -19,25 +19,16 @@
                 </tr>
             </thead>
             <tbody>
-                
+                <c:forEach items="perfiles" var="p">
                     <tr>
-                        <td>1</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td><a class="btn btn-primary" href="/motivacionsport/perfiles/editar.htm">Editar</a></td>
+                        <td>{p.id}</td>
+                        <td>{p.name}</td>
+                        <td>{p.createAt}</td>
+                        <td>{p.active}</td>
+                        <td><a class="btn btn-primary" href="/motivacionsport/perfiles/{p.id}/editar.htm">Editar</a></td>
                     </tr>
-                        
+                </c:forEach>
             </tbody>
-            <tfoot>
-                <tr>
-                    <th>Rendering engine</th>
-                    <th>Browser</th>
-                    <th>Platform(s)</th>
-                    <th>Engine version</th>
-                    <th>CSS grade</th>
-                </tr>
-            </tfoot>
         </table>
     </div>
     <!-- /.box-body -->

@@ -7,7 +7,7 @@
         <footer class="main-footer">
             <!-- To the right -->
             <div class="pull-right hidden-xs">
-                Tercera Prueba Duoc UC
+                Tercera Prueba <img src="http://www.duoc.cl/portafolio/app/img/login/logo_duoc.png" alt="" style="width: 10%" />
             </div>
             <!-- Default to the left -->
             <strong>Copyright &copy; 2017 <a href="#">RodriguezSamm</a>.</strong> All rights reserved.
