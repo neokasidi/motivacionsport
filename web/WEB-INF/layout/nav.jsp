@@ -6,14 +6,14 @@
     <li class="header">Administracion</li>
     <li><a href="#"><i class="fa fa-link"></i> <span>Local</span></a></li>
     <li class="treeview">
-        <a href="#"><i class="fa fa-link"></i> <span>Perfiles</span>
+        <a href="#"><i class="fa fa-link"></i> <span>Usuarios</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
             </span>
         </a>
         <ul class="treeview-menu">
-            <li><a href="#">Listar Perfiles</a></li>
-            <li><a href="#">Crear Nuevo Perfil</a></li>
+            <li><a href="#">Listar Usuario</a></li>
+            <li><a href="#">Crear Nuevo Usuario</a></li>
         </ul>
     </li>
     <li class="treeview">

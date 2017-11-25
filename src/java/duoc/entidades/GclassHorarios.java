@@ -3,19 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cl.duoc.motivacionSport.Entidades;
+package duoc.entidades;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -31,18 +30,16 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author samm
  */
 @Entity
-@Table(name = "gclass_local")
+@Table(name = "gclass_horarios")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "GclassLocal.findAll", query = "SELECT g FROM GclassLocal g"),
-    @NamedQuery(name = "GclassLocal.findById", query = "SELECT g FROM GclassLocal g WHERE g.id = :id"),
-    @NamedQuery(name = "GclassLocal.findByNameLocal", query = "SELECT g FROM GclassLocal g WHERE g.nameLocal = :nameLocal"),
-    @NamedQuery(name = "GclassLocal.findByDireccionLocal", query = "SELECT g FROM GclassLocal g WHERE g.direccionLocal = :direccionLocal"),
-    @NamedQuery(name = "GclassLocal.findByFono", query = "SELECT g FROM GclassLocal g WHERE g.fono = :fono"),
-    @NamedQuery(name = "GclassLocal.findByCreateAt", query = "SELECT g FROM GclassLocal g WHERE g.createAt = :createAt"),
-    @NamedQuery(name = "GclassLocal.findByUpdateAt", query = "SELECT g FROM GclassLocal g WHERE g.updateAt = :updateAt"),
-    @NamedQuery(name = "GclassLocal.findByActive", query = "SELECT g FROM GclassLocal g WHERE g.active = :active")})
-public class GclassLocal implements Serializable {
+    @NamedQuery(name = "GclassHorarios.findAll", query = "SELECT g FROM GclassHorarios g"),
+    @NamedQuery(name = "GclassHorarios.findById", query = "SELECT g FROM GclassHorarios g WHERE g.id = :id"),
+    @NamedQuery(name = "GclassHorarios.findByNameHorario", query = "SELECT g FROM GclassHorarios g WHERE g.nameHorario = :nameHorario"),
+    @NamedQuery(name = "GclassHorarios.findByCreateAt", query = "SELECT g FROM GclassHorarios g WHERE g.createAt = :createAt"),
+    @NamedQuery(name = "GclassHorarios.findByUpdateAt", query = "SELECT g FROM GclassHorarios g WHERE g.updateAt = :updateAt"),
+    @NamedQuery(name = "GclassHorarios.findByActive", query = "SELECT g FROM GclassHorarios g WHERE g.active = :active")})
+public class GclassHorarios implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -51,13 +48,8 @@ public class GclassLocal implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Size(max = 50)
-    @Column(name = "name_local")
-    private String nameLocal;
-    @Size(max = 250)
-    @Column(name = "direccion_local")
-    private String direccionLocal;
-    @Column(name = "fono")
-    private Integer fono;
+    @Column(name = "name_horario")
+    private String nameHorario;
     @Column(name = "create_at")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createAt;
@@ -66,16 +58,15 @@ public class GclassLocal implements Serializable {
     private Date updateAt;
     @Column(name = "active")
     private Short active;
-    @OneToMany(mappedBy = "localId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "horarioIdIn")
     private List<GclassClass> gclassClassList;
-    @JoinColumn(name = "comuna_id", referencedColumnName = "id")
-    @ManyToOne
-    private GclassComunas comunaId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "horarioIdOut")
+    private List<GclassClass> gclassClassList1;
 
-    public GclassLocal() {
+    public GclassHorarios() {
     }
 
-    public GclassLocal(Integer id) {
+    public GclassHorarios(Integer id) {
         this.id = id;
     }
 
@@ -87,28 +78,12 @@ public class GclassLocal implements Serializable {
         this.id = id;
     }
 
-    public String getNameLocal() {
-        return nameLocal;
+    public String getNameHorario() {
+        return nameHorario;
     }
 
-    public void setNameLocal(String nameLocal) {
-        this.nameLocal = nameLocal;
-    }
-
-    public String getDireccionLocal() {
-        return direccionLocal;
-    }
-
-    public void setDireccionLocal(String direccionLocal) {
-        this.direccionLocal = direccionLocal;
-    }
-
-    public Integer getFono() {
-        return fono;
-    }
-
-    public void setFono(Integer fono) {
-        this.fono = fono;
+    public void setNameHorario(String nameHorario) {
+        this.nameHorario = nameHorario;
     }
 
     public Date getCreateAt() {
@@ -144,12 +119,13 @@ public class GclassLocal implements Serializable {
         this.gclassClassList = gclassClassList;
     }
 
-    public GclassComunas getComunaId() {
-        return comunaId;
+    @XmlTransient
+    public List<GclassClass> getGclassClassList1() {
+        return gclassClassList1;
     }
 
-    public void setComunaId(GclassComunas comunaId) {
-        this.comunaId = comunaId;
+    public void setGclassClassList1(List<GclassClass> gclassClassList1) {
+        this.gclassClassList1 = gclassClassList1;
     }
 
     @Override
@@ -162,10 +138,10 @@ public class GclassLocal implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof GclassLocal)) {
+        if (!(object instanceof GclassHorarios)) {
             return false;
         }
-        GclassLocal other = (GclassLocal) object;
+        GclassHorarios other = (GclassHorarios) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -174,7 +150,7 @@ public class GclassLocal implements Serializable {
 
     @Override
     public String toString() {
-        return "cl.duoc.motivacionSport.Entidades.GclassLocal[ id=" + id + " ]";
+        return "cl.duoc.motivacionSport.Entidades.GclassHorarios[ id=" + id + " ]";
     }
     
 }

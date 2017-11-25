@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cl.duoc.motivacionSport.Entidades;
+package duoc.entidades;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -31,16 +31,18 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author samm
  */
 @Entity
-@Table(name = "gclass_comunas")
+@Table(name = "gclass_local")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "GclassComunas.findAll", query = "SELECT g FROM GclassComunas g"),
-    @NamedQuery(name = "GclassComunas.findById", query = "SELECT g FROM GclassComunas g WHERE g.id = :id"),
-    @NamedQuery(name = "GclassComunas.findByName", query = "SELECT g FROM GclassComunas g WHERE g.name = :name"),
-    @NamedQuery(name = "GclassComunas.findByCreateAt", query = "SELECT g FROM GclassComunas g WHERE g.createAt = :createAt"),
-    @NamedQuery(name = "GclassComunas.findByUpdateAt", query = "SELECT g FROM GclassComunas g WHERE g.updateAt = :updateAt"),
-    @NamedQuery(name = "GclassComunas.findByActive", query = "SELECT g FROM GclassComunas g WHERE g.active = :active")})
-public class GclassComunas implements Serializable {
+    @NamedQuery(name = "GclassLocal.findAll", query = "SELECT g FROM GclassLocal g"),
+    @NamedQuery(name = "GclassLocal.findById", query = "SELECT g FROM GclassLocal g WHERE g.id = :id"),
+    @NamedQuery(name = "GclassLocal.findByNameLocal", query = "SELECT g FROM GclassLocal g WHERE g.nameLocal = :nameLocal"),
+    @NamedQuery(name = "GclassLocal.findByDireccionLocal", query = "SELECT g FROM GclassLocal g WHERE g.direccionLocal = :direccionLocal"),
+    @NamedQuery(name = "GclassLocal.findByFono", query = "SELECT g FROM GclassLocal g WHERE g.fono = :fono"),
+    @NamedQuery(name = "GclassLocal.findByCreateAt", query = "SELECT g FROM GclassLocal g WHERE g.createAt = :createAt"),
+    @NamedQuery(name = "GclassLocal.findByUpdateAt", query = "SELECT g FROM GclassLocal g WHERE g.updateAt = :updateAt"),
+    @NamedQuery(name = "GclassLocal.findByActive", query = "SELECT g FROM GclassLocal g WHERE g.active = :active")})
+public class GclassLocal implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -49,8 +51,13 @@ public class GclassComunas implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Size(max = 50)
-    @Column(name = "name")
-    private String name;
+    @Column(name = "name_local")
+    private String nameLocal;
+    @Size(max = 250)
+    @Column(name = "direccion_local")
+    private String direccionLocal;
+    @Column(name = "fono")
+    private Integer fono;
     @Column(name = "create_at")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createAt;
@@ -59,18 +66,16 @@ public class GclassComunas implements Serializable {
     private Date updateAt;
     @Column(name = "active")
     private Short active;
-    @OneToMany(mappedBy = "comunaId")
-    private List<GclassUsuario> gclassUsuarioList;
-    @OneToMany(mappedBy = "comunaId")
-    private List<GclassLocal> gclassLocalList;
-    @JoinColumn(name = "region_id", referencedColumnName = "id")
+    @OneToMany(mappedBy = "localId")
+    private List<GclassClass> gclassClassList;
+    @JoinColumn(name = "comuna_id", referencedColumnName = "id")
     @ManyToOne
-    private GclassRegion regionId;
+    private GclassComunas comunaId;
 
-    public GclassComunas() {
+    public GclassLocal() {
     }
 
-    public GclassComunas(Integer id) {
+    public GclassLocal(Integer id) {
         this.id = id;
     }
 
@@ -82,12 +87,28 @@ public class GclassComunas implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNameLocal() {
+        return nameLocal;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNameLocal(String nameLocal) {
+        this.nameLocal = nameLocal;
+    }
+
+    public String getDireccionLocal() {
+        return direccionLocal;
+    }
+
+    public void setDireccionLocal(String direccionLocal) {
+        this.direccionLocal = direccionLocal;
+    }
+
+    public Integer getFono() {
+        return fono;
+    }
+
+    public void setFono(Integer fono) {
+        this.fono = fono;
     }
 
     public Date getCreateAt() {
@@ -115,29 +136,20 @@ public class GclassComunas implements Serializable {
     }
 
     @XmlTransient
-    public List<GclassUsuario> getGclassUsuarioList() {
-        return gclassUsuarioList;
+    public List<GclassClass> getGclassClassList() {
+        return gclassClassList;
     }
 
-    public void setGclassUsuarioList(List<GclassUsuario> gclassUsuarioList) {
-        this.gclassUsuarioList = gclassUsuarioList;
+    public void setGclassClassList(List<GclassClass> gclassClassList) {
+        this.gclassClassList = gclassClassList;
     }
 
-    @XmlTransient
-    public List<GclassLocal> getGclassLocalList() {
-        return gclassLocalList;
+    public GclassComunas getComunaId() {
+        return comunaId;
     }
 
-    public void setGclassLocalList(List<GclassLocal> gclassLocalList) {
-        this.gclassLocalList = gclassLocalList;
-    }
-
-    public GclassRegion getRegionId() {
-        return regionId;
-    }
-
-    public void setRegionId(GclassRegion regionId) {
-        this.regionId = regionId;
+    public void setComunaId(GclassComunas comunaId) {
+        this.comunaId = comunaId;
     }
 
     @Override
@@ -150,10 +162,10 @@ public class GclassComunas implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof GclassComunas)) {
+        if (!(object instanceof GclassLocal)) {
             return false;
         }
-        GclassComunas other = (GclassComunas) object;
+        GclassLocal other = (GclassLocal) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -162,7 +174,7 @@ public class GclassComunas implements Serializable {
 
     @Override
     public String toString() {
-        return "cl.duoc.motivacionSport.Entidades.GclassComunas[ id=" + id + " ]";
+        return "cl.duoc.motivacionSport.Entidades.GclassLocal[ id=" + id + " ]";
     }
     
 }

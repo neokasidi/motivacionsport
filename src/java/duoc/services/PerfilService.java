@@ -1,7 +1,7 @@
-package cl.duoc.motivacionSport.Service;
+package duoc.services;
 
-import cl.duoc.motivacionSport.Dao.PerfilDao;
-import cl.duoc.motivacionSport.Entidades.GclassPerfil;
+import duoc.dao.PerfilDao;
+import duoc.entidades.GclassPerfil;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

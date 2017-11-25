@@ -4,21 +4,6 @@
 <%@include file="../layout/head.jsp" %>
 <div class="box">
     <div class="box-header">
-        <h4>Nuevo Perfil</h4>
-    </div>
-    <!-- /.box-header -->
-    <div class="box-body">
-        <f:form method="post" action="/motivacionsport/perfiles/crear.htm" commandName="perfile">
-            <div class="form-group">
-                <f:label path="name">Nombre:</f:label>
-                <f:input cssClass="form-control" path="name"/>
-            </div>          
-            <button type="submit" class="btn btn-success">Nuevo Perfil</button>           
-        </f:form>
-    </div>
-</div>
-<div class="box">
-    <div class="box-header">
         <h3 class="box-title">Data Table With Full Features</h3>
     </div>
     <!-- /.box-header -->

@@ -17,12 +17,9 @@
     
     <mvc:annotation-driven/>
     
-    <context:component-scan base-package="cl.duoc.motivacionSport.Controller"/>
-    <context:component-scan base-package="cl.duoc.motivacionSport.Service"/>
-    <context:component-scan base-package="cl.duoc.motivacionSport.Dao"/>
-    <context:component-scan base-package="cl.duoc.motivacionSport.Entidades"/>
+    <context:component-scan base-package="duoc"/>
 
-    <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/> 
+    <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
        
     
     <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">

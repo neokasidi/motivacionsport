@@ -1,6 +1,6 @@
-package cl.duoc.motivacionSport.Dao;
+package duoc.dao;
 
-import cl.duoc.motivacionSport.Entidades.GclassPerfil;
+import duoc.entidades.GclassPerfil;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
