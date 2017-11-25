@@ -7,24 +7,27 @@ package duoc.dao;
 
 import duoc.entidades.GclassPerfil;
 import java.util.List;
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Usuario
  */
-@Stateless
+@Repository("PerfilDao")
 public class PerfilDao {
     
     @PersistenceContext
     private EntityManager em;
 
+    @Transactional
     public void agregar(GclassPerfil perfil) {
         em.persist(perfil);
     }
 
+    @Transactional
     public void modificar(GclassPerfil perfil) {
         em.merge(perfil);
     }

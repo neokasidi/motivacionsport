@@ -6,26 +6,28 @@
 package duoc.dao;
 
 import duoc.entidades.GclassHorarios;
-import duoc.entidades.GclassUsuario;
 import java.util.List;
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Usuario
  */
-@Stateless
+@Repository("HorarioDao")
 public class HorarioDao {
     
     @PersistenceContext
     private EntityManager em;
 
+    @Transactional
     public void agregar(GclassHorarios horario) {
         em.persist(horario);
     }
 
+    @Transactional
     public void modificar(GclassHorarios horario) {
         em.merge(horario);
     }

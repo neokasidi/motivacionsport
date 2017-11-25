@@ -7,15 +7,15 @@ package duoc.dao;
 
 import duoc.entidades.GclassRegion;
 import java.util.List;
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Usuario
  */
-@Stateless
+@Repository("RegionDao")
 public class RegionDao {
     
     @PersistenceContext

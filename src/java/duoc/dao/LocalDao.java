@@ -7,24 +7,27 @@ package duoc.dao;
 
 import duoc.entidades.GclassLocal;
 import java.util.List;
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Usuario
  */
-@Stateless
+@Repository("LocalDao")
 public class LocalDao {
     
     @PersistenceContext
     private EntityManager em;
 
+    @Transactional
     public void agregar(GclassLocal local) {
         em.persist(local);
     }
 
+    @Transactional
     public void modificar(GclassLocal local) {
         em.merge(local);
     }

@@ -7,24 +7,27 @@ package duoc.dao;
 
 import duoc.entidades.GclassClass;
 import java.util.List;
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Usuario
  */
-@Stateless
+@Repository("ClassDao")
 public class ClassDao {
     
     @PersistenceContext
     private EntityManager em;
     
+    @Transactional
     public void agregar(GclassClass clase) {
         em.persist(clase);
     }
 
+    @Transactional
     public void modificar(GclassClass clase) {
         em.merge(clase);
     }
