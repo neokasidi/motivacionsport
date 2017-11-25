@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/perfiles")
 public class PerfilesController {
     
-    @Autowired
-    @Qualifier("PerfilDao")
-    PerfilDao perfilDao;
+   // @Autowired
+    //@Qualifier("PerfilDao")
+    //PerfilDao perfilDao;
     
     @RequestMapping(method = RequestMethod.GET,value = "/listar.htm")
     public String iwnicio(Model model){        
-        model.addAttribute("perfiles", perfilDao.allEntries());        
+       // model.addAttribute("perfiles", perfilDao.allEntries());        
         return "perfiles";
     }
     

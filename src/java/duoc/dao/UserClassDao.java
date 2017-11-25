@@ -5,7 +5,7 @@
  */
 package duoc.dao;
 
-import duoc.entidades.GclassPerfil;
+import duoc.entidades.GclassUserClass;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -16,22 +16,24 @@ import javax.persistence.PersistenceContext;
  * @author Usuario
  */
 @Stateless
-public class PerfilDao {
+public class UserClassDao {
     
     @PersistenceContext
     private EntityManager em;
-
-    public void agregar(GclassPerfil perfil) {
-        em.persist(perfil);
+    
+    public void agregar(GclassUserClass userClass) {
+        em.persist(userClass);
     }
 
-    public void modificar(GclassPerfil perfil) {
-        em.merge(perfil);
+    public void modificar(GclassUserClass userClass) {
+        em.merge(userClass);
     }
     
-    public List<GclassPerfil> getListadoPerfil(){
+    public List<GclassUserClass> getListadoUser(){
         
         String jpql = "select p from GclassPerfil p order by p.name";
-        return em.createQuery(jpql, GclassPerfil.class).getResultList();
+        return em.createQuery(jpql, GclassUserClass.class).getResultList();
     }
+    
+    
 }
