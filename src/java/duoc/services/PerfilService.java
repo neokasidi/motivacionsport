@@ -9,17 +9,18 @@ import duoc.dao.PerfilDao;
 import duoc.entidades.GclassPerfil;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.ejb.Stateless;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Usuario
  */
-@Stateless
+@Service("PerfilService")
 public class PerfilService {
     
-    @EJB
-    private PerfilDao perfilDao;
+    @Autowired
+    PerfilDao perfilDao;
     
     public void grabar(GclassPerfil perfil){
         
