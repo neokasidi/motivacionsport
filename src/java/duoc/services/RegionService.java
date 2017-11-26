@@ -5,10 +5,25 @@
  */
 package duoc.services;
 
+import duoc.dao.RegionDao;
+import duoc.entidades.GclassRegion;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 /**
  *
  * @author Usuario
  */
+@Service("RegionService")
 public class RegionService {
+    
+      
+    @Autowired
+    RegionDao regionDao;
+    
+      public List<GclassRegion> getListadoRegion(){
+        return regionDao.getListadoRegion();
+    }
     
 }

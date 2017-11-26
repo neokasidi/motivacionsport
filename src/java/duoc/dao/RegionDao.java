@@ -21,7 +21,7 @@ public class RegionDao {
     @PersistenceContext
     private EntityManager em;
     
-     public List<GclassRegion> getListadoHorario() {
+     public List<GclassRegion> getListadoRegion() {
 
         String jpql = "select u from GclassUsuario u order by u.name";
         return em.createQuery(jpql, GclassRegion.class).getResultList();

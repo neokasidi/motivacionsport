@@ -8,18 +8,18 @@ package duoc.services;
 import duoc.dao.ClassDao;
 import duoc.entidades.GclassClass;
 import java.util.List;
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Usuario
  */
-@Stateless
+@Service("ClassService")
 public class ClassService {
     
-    @EJB
-    private ClassDao claseDao;
+    @Autowired
+    ClassDao claseDao;
     
     public List<GclassClass> getListadoClase(){
         return claseDao.getListadoClase();

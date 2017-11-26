@@ -5,10 +5,35 @@
  */
 package duoc.services;
 
+import duoc.dao.LocalDao;
+import duoc.entidades.GclassLocal;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 /**
  *
  * @author Usuario
  */
+
+@Service("LocalService")
 public class LocalService {
+    
+    @Autowired
+    LocalDao localDao;
+    
+    public void grabar(GclassLocal local){
+        
+        localDao.agregar(local);
+    }
+    
+    public void modificar(GclassLocal local){
+        
+        localDao.modificar(local);
+    }
+
+    public List<GclassLocal> getListadoLocal(){
+        return localDao.getListadoLocal();
+    }
     
 }
